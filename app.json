@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "bombApp",
+    "slug": "bombApp",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
