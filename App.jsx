@@ -4,6 +4,7 @@ import { View } from "react-native";
 import { ThemeProvider } from "styled-components";
 
 import theme from "./src/global/styles/theme";
+import Routes from "./src/Routes";
 
 import {
   useFonts,
@@ -11,8 +12,6 @@ import {
   Roboto_500Medium,
   Roboto_700Bold,
 } from "@expo-google-fonts/roboto";
-
-import Routes from "./src/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({

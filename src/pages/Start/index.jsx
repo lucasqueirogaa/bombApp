@@ -11,6 +11,14 @@ export default function Start() {
     navigation.navigate("Rules");
   }
 
+  function handleNavToPlayAlone() {
+    navigation.navigate("PlayAlone");
+  }
+
+  function handleNavToPlayTogether() {
+    navigation.navigate("PlayTogether");
+  }
+
   return (
     <Container>
       <Logo
@@ -19,8 +27,16 @@ export default function Start() {
       />
       <Title>Bem-vindo ao {"\n"} Bomb game</Title>
       <SubTitle>Escolha um modo de jogo.</SubTitle>
-      <ButtonComponent buttonText={"Jogar Solo"} />
-      <ButtonComponent buttonText={"Jogar Em Dupla"} />
+      <ButtonComponent
+        handleNav={handleNavToPlayAlone}
+        buttonText={"Jogar Solo"}
+        bgColor={"red"}
+      />
+      <ButtonComponent
+        handleNav={handleNavToPlayTogether}
+        buttonText={"Jogar Em Dupla"}
+        bgColor={"red"}
+      />
       <Rules onPress={handleNavToRules}>Ver regras</Rules>
     </Container>
   );
