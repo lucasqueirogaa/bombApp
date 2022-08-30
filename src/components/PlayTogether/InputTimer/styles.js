@@ -1,21 +1,9 @@
 import styled from "styled-components";
 import { RFValue } from "react-native-responsive-fontsize";
-import { getStatusBarHeight } from "react-native-iphone-x-helper";
-
-export const Container = styled.View`
-  flex: 1;
-  margin-top: ${getStatusBarHeight() + RFValue(50)}px;
-`;
-
-export const Title = styled.Text`
-  font-size: ${RFValue(32)}px;
-  font-family: ${({ theme }) => theme.fonts.bold};
-  text-align: center;
-`;
 
 export const TimerContainer = styled.View`
-  margin-top: ${RFValue(60)}px;
-  margin-bottom: ${RFValue(10)}px;
+  margin-top: ${RFValue(20)}px;
+  margin-bottom: ${RFValue(30)}px;
 `;
 
 export const TextTimeTimerContainer = styled.View`
@@ -42,9 +30,4 @@ export const Timer = styled.View`
 export const TextTimer = styled.Text`
   font-size: ${RFValue(38)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
-`;
-
-export const ButtonStart = styled.Button`
-  width: ${RFValue(280)}px;
-  height: ${RFValue(60)}px;
 `;

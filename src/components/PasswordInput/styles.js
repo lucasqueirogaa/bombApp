@@ -18,5 +18,8 @@ export const InputContainer = styled.View`
 export const Input = styled.TextInput`
   font-size: ${RFValue(30)}px;
   padding: ${RFValue(10)}px;
+  border-radius: ${RFValue(5)}px;
   width: 100%;
+  background-color: ${(props) =>
+    props.abled === false ? "#bbb" : "transparent"};
 `;

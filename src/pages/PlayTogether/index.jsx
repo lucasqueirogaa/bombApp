@@ -1,28 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 
-import {
-  Container,
-  Title,
-  TimerContainer,
-  TextTimeTimerContainer,
-  TextTimeTimer,
-  Timer,
-  TextTimer,
-  TipText,
-  InputContainer,
-  Input,
-} from "./styles";
+import { Container, Title, TipText, InputContainer, Input } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 import Button from "../../components/Buttons";
 import PasswordInput from "../../components/PasswordInput";
+import InputTimer from "../../components/PlayTogether/InputTimer";
+import TipInput from "../../components/PlayTogether/TipInput";
+import { KeyboardAvoidingView } from "react-native";
 
 export default function PlayTogether() {
+  const [start, setStart] = useState(false);
   const navigation = useNavigation();
 
   function handleNavToStart() {
     navigation.navigate("Start");
   }
+
+  function handleStart() {
+    setStart(true);
+  }
+
   function handleNavToSucc() {
     navigation.navigate("Disarmed", {
       playAgain: "PlayTogether",
@@ -35,26 +33,22 @@ export default function PlayTogether() {
   return (
     <Container>
       <Title>Bomb Game Dupla</Title>
-      <TimerContainer>
-        <TextTimeTimerContainer>
-          <TextTimeTimer>Horas</TextTimeTimer>
-          <TextTimeTimer>Minutos</TextTimeTimer>
-          <TextTimeTimer>Segundos</TextTimeTimer>
-        </TextTimeTimerContainer>
-        <Timer>
-          <TextTimer>00 : 00 : 00</TextTimer>
-        </Timer>
-      </TimerContainer>
-      <TipText>Dica de senha:</TipText>
-      <InputContainer>
-        <Input placeholder="Dica para a sua dupla" />
-      </InputContainer>
-      <PasswordInput />
-      <Button
-        buttonText="Iniciar"
-        bgColor={true}
-        handleNav={handleNavToStart}
-      />
+      <InputTimer />
+      <TipInput started={start} />
+      <PasswordInput started={start} />
+      {start === false ? (
+        <Button
+          buttonText="Iniciar"
+          bgColor={true}
+          handleNav={handleNavToStart && handleStart}
+        />
+      ) : (
+        <Button
+          buttonText="Desarmar"
+          bgColor={true}
+          handleNav={handleNavToStart}
+        />
+      )}
       <Button
         buttonText="Página Inicial"
         bgColor={true}

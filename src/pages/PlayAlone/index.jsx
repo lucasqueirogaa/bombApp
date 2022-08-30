@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Container,
@@ -15,11 +15,17 @@ import Button from "../../components/Buttons";
 import PasswordInput from "../../components/PasswordInput";
 
 export default function PlayAlone() {
+  const [start, setStart] = useState(false);
+
   const route = useRoute();
   const navigation = useNavigation();
 
   function handleNavToStart() {
     navigation.navigate("Start");
+  }
+
+  function handleStart() {
+    setStart(true);
   }
 
   function handleNavToPlayAgain() {
@@ -40,12 +46,20 @@ export default function PlayAlone() {
           <TextTimer>00 : 05 : 00</TextTimer>
         </Timer>
       </TimerContainer>
-      <PasswordInput />
-      <Button
-        buttonText="Iniciar"
-        bgColor={true}
-        handleNav={handleNavToStart}
-      />
+      <PasswordInput started={start} />
+      {start === false ? (
+        <Button
+          buttonText="Iniciar"
+          bgColor={true}
+          handleNav={handleNavToStart && handleStart}
+        />
+      ) : (
+        <Button
+          buttonText="Desarmar"
+          bgColor={true}
+          handleNav={handleNavToStart}
+        />
+      )}
       <Button
         buttonText="Página Inicial"
         bgColor={true}
