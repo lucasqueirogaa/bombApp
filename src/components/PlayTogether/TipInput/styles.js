@@ -8,6 +8,7 @@ export const Container = styled.View`
 export const TipText = styled.Text`
   font-size: ${RFValue(20)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
+  color: ${({ theme }) => theme.colors.white};
 `;
 
 export const InputContainer = styled.View`

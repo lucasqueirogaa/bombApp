@@ -9,7 +9,7 @@ export const Container = styled.View`
 `;
 
 export const InputContainer = styled.View`
-  border: ${RFValue(1)}px solid black;
+  border: ${RFValue(1)}px solid white;
   border-radius: ${RFValue(5)}px;
   justify-content: center;
   align-items: center;
@@ -18,8 +18,10 @@ export const InputContainer = styled.View`
 export const Input = styled.TextInput`
   font-size: ${RFValue(30)}px;
   padding: ${RFValue(10)}px;
+  color: ${({ theme }) => theme.colors.white};
+  text-align: center;
   border-radius: ${RFValue(5)}px;
   width: 100%;
   background-color: ${(props) =>
-    props.abled === false ? "#bbb" : "transparent"};
+    props.abled === false ? "#9999998c" : "transparent"};
 `;

@@ -7,7 +7,6 @@ import Button from "../../components/Buttons";
 import PasswordInput from "../../components/PasswordInput";
 import InputTimer from "../../components/PlayTogether/InputTimer";
 import TipInput from "../../components/PlayTogether/TipInput";
-import { KeyboardAvoidingView } from "react-native";
 
 export default function PlayTogether() {
   const [start, setStart] = useState(false);

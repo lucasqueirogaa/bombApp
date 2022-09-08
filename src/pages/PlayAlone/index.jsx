@@ -1,21 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-  Container,
-  Title,
-  TimerContainer,
-  TextTimeTimerContainer,
-  TextTimeTimer,
-  Timer,
-  TextTimer,
-} from "./styles";
+import { Container, Title, Timer, TextTimer } from "./styles";
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 import Button from "../../components/Buttons";
 import PasswordInput from "../../components/PasswordInput";
+import { ImageBackground } from "react-native";
+
+import bombImg from "../../assets/bomba.png";
 
 export default function PlayAlone() {
   const [start, setStart] = useState(false);
+  // const [bombState, setBombState] = useState();
 
   const route = useRoute();
   const navigation = useNavigation();
@@ -33,19 +29,41 @@ export default function PlayAlone() {
     navigation.navigate(route.params.playAgain);
   }
 
+  // useEffect(() => {
+  //   setBombState({
+  //     // start: false,
+  //     bombClock: {
+  //       hours: "123",
+  //       minutes: "",
+  //       seconds: "",
+  //     },
+  //     password: "",
+  //     passwordSaved: "",
+  //     message: "",
+  //     status: "Start",
+  //   });
+  // }, []);
+
+  // let countdownInterval = 0;
+
   return (
     <Container>
       <Title>Bomb Game Solo</Title>
-      <TimerContainer>
-        <TextTimeTimerContainer>
-          <TextTimeTimer>Horas</TextTimeTimer>
-          <TextTimeTimer>Minutos</TextTimeTimer>
-          <TextTimeTimer>Segundos</TextTimeTimer>
-        </TextTimeTimerContainer>
+      {/* <Title>{bombState.password}</Title> */}
+      <ImageBackground
+        source={bombImg}
+        resizeMode="cover"
+        style={{
+          marginTop: 50,
+          minHeight: 130,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Timer>
           <TextTimer>00 : 05 : 00</TextTimer>
         </Timer>
-      </TimerContainer>
+      </ImageBackground>
       <PasswordInput started={start} />
       {start === false ? (
         <Button

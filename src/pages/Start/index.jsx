@@ -22,7 +22,7 @@ export default function Start() {
   return (
     <Container>
       <Logo
-        source={require("../../assets/logo.png")}
+        source={require("../../assets/logoDark.png")}
         style={{ resizeMode: "contain" }}
       />
       <Title>Bem-vindo ao {"\n"} Bomb game</Title>
@@ -37,7 +37,7 @@ export default function Start() {
         buttonText={"Jogar Em Dupla"}
         bgColor={"red"}
       />
-      <Rules onPress={handleNavToRules}>Ver regras</Rules>
+      <Rules onPress={handleNavToRules}>Ver as regras do jogo</Rules>
     </Container>
   );
 }

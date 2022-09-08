@@ -1,23 +1,23 @@
 import React from "react";
-import {
-  TextTimeTimer,
-  TextTimeTimerContainer,
-  TimerContainer,
-  Timer,
-  TextTimer,
-} from "./styles";
+import { ImageBackground } from "react-native";
+import { Timer, TextTimer } from "./styles";
+import bombImg from "../../../assets/bomba.png";
 
 export default function InputTimer() {
   return (
-    <TimerContainer>
-      <TextTimeTimerContainer>
-        <TextTimeTimer>Horas</TextTimeTimer>
-        <TextTimeTimer>Minutos</TextTimeTimer>
-        <TextTimeTimer>Segundos</TextTimeTimer>
-      </TextTimeTimerContainer>
+    <ImageBackground
+      source={bombImg}
+      resizeMode="cover"
+      style={{
+        marginTop: 50,
+        minHeight: 130,
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
       <Timer>
-        <TextTimer>00 : 00 : 00</TextTimer>
+        <TextTimer>00 : 05 : 00</TextTimer>
       </Timer>
-    </TimerContainer>
+    </ImageBackground>
   );
 }
