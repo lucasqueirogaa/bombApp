@@ -1,16 +1,12 @@
 import React from "react";
 import ButtonComponent from "../../components/Buttons";
-import { Container, Logo, SubTitle, Title } from "./styles";
+import { Container, Logo, SucessImg, Title } from "./styles";
 
 import { useNavigation, useRoute } from "@react-navigation/native";
 
 export default function Disarmed() {
   const route = useRoute();
   const navigation = useNavigation();
-
-  function handleNavToPlayAgain() {
-    navigation.navigate(route.params.playAgain);
-  }
 
   function handleNavToStart() {
     navigation.navigate("Start");
@@ -23,18 +19,13 @@ export default function Disarmed() {
         style={{ resizeMode: "contain" }}
       />
       <Title>Parabéns!!!{"\n"}Você desarmou</Title>
-      <SubTitle>
-        Muito obrigado por salvar todo mundo, você é um herói, somos gratos!
-      </SubTitle>
-      <ButtonComponent
-        buttonText={"Jogar Novamente"}
-        bgRed={false}
-        handleNav={handleNavToPlayAgain}
+      <SucessImg
+        source={require("../../assets/bomba_cortada_matrix.png")}
+        style={{ resizeMode: "contain" }}
       />
       <ButtonComponent
         buttonText={"Página incial"}
-        bgRed={false}
-        handleNav={handleNavToStart}
+        handlePress={handleNavToStart}
       />
     </Container>
   );

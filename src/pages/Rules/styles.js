@@ -16,7 +16,7 @@ export const Icon = styled(MaterialIcons)`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const ContainerText = styled.ScrollView.attrs({
+export const ScrollTextRules = styled.ScrollView.attrs({
   showsVerticalScrollIndicator: false,
 })``;
 

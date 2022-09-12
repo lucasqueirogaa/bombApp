@@ -1,21 +1,23 @@
 import React from "react";
-import { Container, Input, InputContainer, TipText } from "./styles";
+import { Container, Input, InputContainer, TipText, TipTitle } from "./styles";
 
-export default function TipInput({ started }) {
+export default function TipInput({ started, valueInput, setValueInput }) {
   return (
     <Container>
-      <TipText>Dica de senha:</TipText>
-      <InputContainer abled={started}>
-        {started === false ? (
+      <TipTitle>Dica de senha:</TipTitle>
+      {!started ? (
+        <InputContainer>
           <Input
-            placeholder="Disponível quando iniciar"
-            editable={false}
-            selectTextOnFocus={false}
+            placeholder="Dica para a sua dupla"
+            value={valueInput}
+            onChangeText={(value) => {
+              setValueInput(value);
+            }}
           />
-        ) : (
-          <Input placeholder="Dica para a sua dupla" abled={started} />
-        )}
-      </InputContainer>
+        </InputContainer>
+      ) : (
+        <TipText>{valueInput}</TipText>
+      )}
     </Container>
   );
 }

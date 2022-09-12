@@ -2,11 +2,11 @@ import React from "react";
 import { Text } from "react-native";
 import { Button, ButtonContent } from "./styles";
 
-export default function ButtonComponent({ buttonText, handleNav, bgColor }) {
+export default function ButtonComponent({ buttonText, handlePress }) {
   return (
-    <Button activeOpacity={0.95} onPress={handleNav} bgRed={bgColor}>
+    <Button activeOpacity={0.95} onPress={handlePress}>
       <Text>
-        <ButtonContent bgRed={bgColor}>{buttonText}</ButtonContent>
+        <ButtonContent>{buttonText}</ButtonContent>
       </Text>
     </Button>
   );

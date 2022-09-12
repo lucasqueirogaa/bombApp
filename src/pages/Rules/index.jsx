@@ -1,7 +1,7 @@
 import React from "react";
 import {
   Container,
-  ContainerText,
+  ScrollTextRules,
   Icon,
   NumberParagraph,
   Paragraph,
@@ -20,44 +20,37 @@ export default function Rules() {
   return (
     <Container>
       <Icon name="arrow-back-ios" onPress={handleNavToStart} />
-      <ContainerText>
+      <ScrollTextRules>
         <Title>Jogando Solo</Title>
         <Paragraph>
           <NumberParagraph>1 - </NumberParagraph>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-          assumenda facilis aperiam perferendis? Numquam quidem maiores ad sed
-          quisquam quas et quos voluptatibus vero, natus totam aut. Nihil, optio
-          deserunt!
+          Você vai receber uma dica da senha, que será uma conta matemática,
+          tendo um tempo fixo de 5 minutos para resolver e desarmar a bomba
         </Paragraph>
         <Paragraph>
           <NumberParagraph>2 - </NumberParagraph>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur
-          vero quo corporis assumenda rem inventore, commodi nulla deleniti
-          labore ad!
+          Toda vez que você errar, o seu aparelho vai vibrar e os campos de
+          senha serão limpos. Se você acertar, será enviado para uma página de
+          sucesso, se errar, será enviado para uma página de falha.
         </Paragraph>
         <Title style={{ marginTop: 30 }}>Jogando Em Dupla</Title>
         <Paragraph>
           <NumberParagraph>1 - </NumberParagraph>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Reiciendis
-          assumenda facilis aperiam perferendis? Numquam quidem maiores ad sed
-          quisquam quas et quos voluptatibus vero, natus totam aut. Nihil, optio
-          deserunt!
+          Para jogar esse jogo, precisa de um parceiro, a pessoa 01 vai colocar:
+          O tempo da bomba, uma dica de senha e a senha.
         </Paragraph>
         <Paragraph>
           <NumberParagraph>2 - </NumberParagraph>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consequatur
-          vero quo corporis assumenda rem inventore, commodi nulla deleniti
-          labore ad!
+          Assim que ela preencher tudo ela deve clicar em "iniciar" e depois
+          disso vai ser iniciada a contagem. Se você errar, o celular vai vibrar
+          indicando o erro.
         </Paragraph>
         <Paragraph style={{ marginBottom: 20 }}>
           <NumberParagraph>3 - </NumberParagraph>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero id,
-          facilis voluptatum optio repudiandae adipisci fugit! Esse veniam qui
-          ipsam, cumque fugit fugiat asperiores fuga mollitia, ut soluta, odit
-          eveniet dicta! Provident voluptates perferendis nemo maiores corrupti
-          exercitationem quis aliquid!
+          Se acertar vocề vai ser enviado para uma página de sucesso, se errar,
+          vai ser enviado para uma página de fracasso, terminando assim o jogo.
         </Paragraph>
-      </ContainerText>
+      </ScrollTextRules>
     </Container>
   );
 }

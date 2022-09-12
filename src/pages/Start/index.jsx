@@ -28,14 +28,12 @@ export default function Start() {
       <Title>Bem-vindo ao {"\n"} Bomb game</Title>
       <SubTitle>Escolha um modo de jogo.</SubTitle>
       <ButtonComponent
-        handleNav={handleNavToPlayAlone}
         buttonText={"Jogar Solo"}
-        bgColor={"red"}
+        handlePress={handleNavToPlayAlone}
       />
       <ButtonComponent
-        handleNav={handleNavToPlayTogether}
         buttonText={"Jogar Em Dupla"}
-        bgColor={"red"}
+        handlePress={handleNavToPlayTogether}
       />
       <Rules onPress={handleNavToRules}>Ver as regras do jogo</Rules>
     </Container>

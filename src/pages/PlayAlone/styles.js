@@ -10,7 +10,6 @@ export const Container = styled.View`
 
 export const Title = styled.Text`
   font-size: ${RFValue(32)}px;
-  margin-bottom: ${RFValue(40)}px;
   font-family: ${({ theme }) => theme.fonts.bold};
   color: ${({ theme }) => theme.colors.white};
   text-align: center;
@@ -30,4 +29,20 @@ export const TextTimer = styled.Text`
 export const ButtonStart = styled.Button`
   width: ${RFValue(280)}px;
   height: ${RFValue(60)}px;
+`;
+
+export const TipContainer = styled.View`
+  margin: 0 ${RFValue(45)}px;
+`;
+
+export const TipTitle = styled.Text`
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+`;
+
+export const TipText = styled.Text`
+  font-size: 14px;
+  font-weight: bold;
+  color: white;
 `;

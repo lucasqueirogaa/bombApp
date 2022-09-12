@@ -1,55 +1,86 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
-import { Container, Title, Timer, TextTimer } from "./styles";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  Container,
+  Title,
+  Timer,
+  TextTimer,
+  TipTitle,
+  TipText,
+  TipContainer,
+} from "./styles";
+import { useNavigation } from "@react-navigation/native";
 
 import Button from "../../components/Buttons";
 import PasswordInput from "../../components/PasswordInput";
 import { ImageBackground } from "react-native";
 
 import bombImg from "../../assets/bomba.png";
+import BombService from "../../services/BombApp";
 
 export default function PlayAlone() {
-  const [start, setStart] = useState(false);
-  // const [bombState, setBombState] = useState();
+  const [pin1, setPin1] = useState("");
+  const [pin2, setPin2] = useState("");
+  const [pin3, setPin3] = useState("");
 
-  const route = useRoute();
+  let pin = `${pin1}${pin2}${pin3}`;
+
+  const [start, setStart] = useState(false);
+  const [hours, setHours] = useState("00");
+  const [minutes, setMinutes] = useState("00");
+  const [seconds, setSeconds] = useState("04");
+  const [passwordSaved, setPasswordSaved] = useState("123");
+  const [desarmed, setDesarmed] = useState(false);
+
+  let countDownInterval;
+
   const navigation = useNavigation();
 
   function handleNavToStart() {
     navigation.navigate("Start");
   }
 
-  function handleStart() {
-    setStart(true);
+  function handleStartBomb() {
+    BombService.StartCountdown(
+      seconds,
+      minutes,
+      hours,
+      setSeconds,
+      setMinutes,
+      setHours,
+      pin,
+      passwordSaved,
+      countDownInterval,
+      setStart,
+      desarmed,
+      setDesarmed,
+      navigation
+    );
   }
 
-  function handleNavToPlayAgain() {
-    // PASSAR PARAMETRO DA PÁGINA, PARA AS PÁGINAS DE SUCESSO OU FRACASSO, PARA O BOTÃO "PLAY AGAIN"
-    navigation.navigate(route.params.playAgain);
+  function handleBombActivation() {
+    BombService.BombActivation(
+      hours,
+      minutes,
+      seconds,
+      start,
+      setStart,
+      countDownInterval,
+      pin,
+      passwordSaved,
+      setPin1,
+      setPin2,
+      setPin3,
+      setPasswordSaved,
+      handleStartBomb,
+      setDesarmed,
+      navigation
+    );
   }
-
-  // useEffect(() => {
-  //   setBombState({
-  //     // start: false,
-  //     bombClock: {
-  //       hours: "123",
-  //       minutes: "",
-  //       seconds: "",
-  //     },
-  //     password: "",
-  //     passwordSaved: "",
-  //     message: "",
-  //     status: "Start",
-  //   });
-  // }, []);
-
-  // let countdownInterval = 0;
 
   return (
     <Container>
       <Title>Bomb Game Solo</Title>
-      {/* <Title>{bombState.password}</Title> */}
       <ImageBackground
         source={bombImg}
         resizeMode="cover"
@@ -61,28 +92,41 @@ export default function PlayAlone() {
         }}
       >
         <Timer>
-          <TextTimer>00 : 05 : 00</TextTimer>
+          <TextTimer>
+            {hours} : {minutes} : {seconds}
+          </TextTimer>
         </Timer>
       </ImageBackground>
-      <PasswordInput started={start} />
+
+      {start === false ? null : (
+        <TipContainer>
+          <TipTitle>Sua dica:</TipTitle>
+          <TipText>Sua dica é 100 + 98 - 55 + 687 - 707</TipText>
+        </TipContainer>
+      )}
+
+      <PasswordInput
+        started={start}
+        firstValue={pin1}
+        secondValue={pin2}
+        thirdValue={pin3}
+        firstInput={setPin1}
+        secondInput={setPin2}
+        thirdInput={setPin3}
+      />
+
       {start === false ? (
         <Button
           buttonText="Iniciar"
-          bgColor={true}
-          handleNav={handleNavToStart && handleStart}
+          handlePress={() => handleBombActivation()}
         />
       ) : (
         <Button
           buttonText="Desarmar"
-          bgColor={true}
-          handleNav={handleNavToStart}
+          handlePress={() => handleBombActivation()}
         />
       )}
-      <Button
-        buttonText="Página Inicial"
-        bgColor={true}
-        handleNav={handleNavToStart}
-      />
+      <Button buttonText="Página Inicial" handlePress={handleNavToStart} />
     </Container>
   );
 }
