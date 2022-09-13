@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   Container,
@@ -17,22 +17,18 @@ import { ImageBackground } from "react-native";
 
 import bombImg from "../../assets/bomba.png";
 import BombService from "../../services/BombApp";
+import api from "../../services/api/api";
+import moment from "moment";
 
 export default function PlayAlone() {
-  const [pin1, setPin1] = useState("");
-  const [pin2, setPin2] = useState("");
-  const [pin3, setPin3] = useState("");
-
-  let pin = `${pin1}${pin2}${pin3}`;
-
   const [start, setStart] = useState(false);
+  const [pin, setPin] = useState(["", "", ""]);
   const [hours, setHours] = useState("00");
-  const [minutes, setMinutes] = useState("00");
-  const [seconds, setSeconds] = useState("04");
-  const [passwordSaved, setPasswordSaved] = useState("123");
-  const [desarmed, setDesarmed] = useState(false);
-
-  let countDownInterval;
+  const [minutes, setMinutes] = useState("03");
+  const [seconds, setSeconds] = useState("00");
+  const [question, setQuestion] = useState("");
+  const [passwordSaved, setPasswordSaved] = useState("");
+  const [intervalId, setIntervalId] = useState();
 
   const navigation = useNavigation();
 
@@ -40,42 +36,80 @@ export default function PlayAlone() {
     navigation.navigate("Start");
   }
 
-  function handleStartBomb() {
-    BombService.StartCountdown(
-      seconds,
-      minutes,
-      hours,
-      setSeconds,
-      setMinutes,
-      setHours,
-      pin,
-      passwordSaved,
-      countDownInterval,
-      setStart,
-      desarmed,
-      setDesarmed,
-      navigation
-    );
+  async function fetchQuestion() {
+    const randomNumber = Math.floor(Math.random() * 10);
+
+    const { data } = await api.get(`questions/${randomNumber}`);
+
+    setQuestion(data?.pergunta);
+    setPasswordSaved(data?.resp);
   }
 
-  function handleBombActivation() {
-    BombService.BombActivation(
-      hours,
-      minutes,
-      seconds,
-      start,
-      setStart,
-      countDownInterval,
-      pin,
-      passwordSaved,
-      setPin1,
-      setPin2,
-      setPin3,
-      setPasswordSaved,
-      handleStartBomb,
-      setDesarmed,
-      navigation
-    );
+  useEffect(() => {
+    fetchQuestion();
+  }, []);
+
+  function handleStartBomb() {
+    const diffTime = BombService.getDiffTime({ hours, seconds, minutes });
+
+    let duration = moment.duration(diffTime * 1000);
+    const interval = 1000;
+
+    if (diffTime <= 0) return;
+
+    const id = setInterval(() => {
+      duration = moment.duration(duration.asMilliseconds() - interval);
+
+      const hoursDigits = duration.hours().toString().padStart(2, "0");
+      const minutesDigits = duration.minutes().toString().padStart(2, "0");
+      const secondsDigits = duration.seconds().toString().padStart(2, "0");
+
+      const timeEnded =
+        hoursDigits === "00" &&
+        minutesDigits === "00" &&
+        secondsDigits === "00";
+
+      if (timeEnded) {
+        clearInterval(intervalId);
+        setStart(false);
+        navigation.navigate("Exploded");
+      }
+
+      setHours(hoursDigits);
+      setMinutes(minutesDigits);
+      setSeconds(secondsDigits);
+    }, interval);
+
+    setIntervalId(id);
+
+    return null;
+  }
+
+  useEffect(() => {
+    if (start) {
+      handleStartBomb();
+    }
+  }, [start]);
+
+  function handleStartGame() {
+    if (hours.length > 0 || minutes.length > 0 || seconds.length > 0) {
+      setStart(true);
+    }
+  }
+
+  function handleDisarmBomb() {
+    if (pin.join("") === passwordSaved) {
+      clearInterval(intervalId);
+      setStart(false);
+      navigation.navigate("Desarmed");
+
+      return;
+    }
+    setPin(["", "", ""]);
+
+    Vibration.vibrate(1000);
+
+    return;
   }
 
   return (
@@ -98,34 +132,21 @@ export default function PlayAlone() {
         </Timer>
       </ImageBackground>
 
-      {start === false ? null : (
+      {!start ? null : (
         <TipContainer>
           <TipTitle>Sua dica:</TipTitle>
-          <TipText>Sua dica é 100 + 98 - 55 + 687 - 707</TipText>
+          <TipText>{question}</TipText>
         </TipContainer>
       )}
 
-      <PasswordInput
-        started={start}
-        firstValue={pin1}
-        secondValue={pin2}
-        thirdValue={pin3}
-        firstInput={setPin1}
-        secondInput={setPin2}
-        thirdInput={setPin3}
-      />
+      <PasswordInput started={start} pin={pin} setPin={setPin} />
 
-      {start === false ? (
-        <Button
-          buttonText="Iniciar"
-          handlePress={() => handleBombActivation()}
-        />
+      {!start ? (
+        <Button buttonText="Iniciar" handlePress={handleStartGame} />
       ) : (
-        <Button
-          buttonText="Desarmar"
-          handlePress={() => handleBombActivation()}
-        />
+        <Button buttonText="Desarmar" handlePress={handleDisarmBomb} />
       )}
+
       <Button buttonText="Página Inicial" handlePress={handleNavToStart} />
     </Container>
   );

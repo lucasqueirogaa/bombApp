@@ -1,23 +1,8 @@
 import moment from "moment";
-import { useState } from "react";
 import { Vibration } from "react-native";
 
 const BombService = {
-  StartCountdown: (
-    seconds,
-    minutes,
-    hours,
-    setSeconds,
-    setMinutes,
-    setHours,
-    pin,
-    passwordSaved,
-    countDownInterval,
-    setStart,
-    // desarmed,
-    // setDesarmed,
-    navigation
-  ) => {
+  getDiffTime: ({ hours, minutes, seconds }) => {
     const explodeTime = moment();
     let secondsMoment = seconds.length >= 1 ? seconds : 0;
     let minutesMoment = minutes.length >= 1 ? minutes : 0;
@@ -30,96 +15,36 @@ const BombService = {
 
     const currentTime = moment();
 
-    let diffTime = explodeTime.unix() - currentTime.unix();
-    let duration = moment.duration(diffTime * 1000, "milliseconds");
-    const interval = 1000;
+    return explodeTime.unix() - currentTime.unix();
+  },
 
-    if (diffTime > 0) {
-      countDownInterval = setInterval(() => {
-        duration = moment.duration(
-          duration.asMilliseconds() - interval,
-          "milliseconds"
-        );
-        hoursMoment = moment.duration(duration).hours().toString();
-        minutesMoment = moment.duration(duration).minutes().toString();
-        secondsMoment = moment.duration(duration).seconds().toString();
-
-        hoursMoment =
-          hoursMoment.length === 1 ? "0" + hoursMoment : hoursMoment;
-
-        minutesMoment =
-          minutesMoment.length === 1 ? "0" + minutesMoment : minutesMoment;
-
-        secondsMoment =
-          secondsMoment.length === 1 ? "0" + secondsMoment : secondsMoment;
-
-        // if (desarmed === true) {
-        //   console.log("SEM BOMBA");
-        // }
-
-        if (
-          hoursMoment === "00" &&
-          minutesMoment === "00" &&
-          secondsMoment === "00"
-        ) {
-          setStart(false);
-          clearInterval(countDownInterval);
-          // navigation.navigate("Exploded");
-        }
-
-        setHours(hoursMoment);
-        setMinutes(minutesMoment);
-        setSeconds(secondsMoment);
-      }, 1000);
-    }
-
+  StartCountdown: ({
+    setSeconds,
+    setMinutes,
+    setHours,
+    pin,
+    passwordSaved,
+    countDownInterval,
+    setStart,
+    diffTime,
+    handleNavToExploded,
+  }) => {
     return null;
   },
 
-  BombActivation: (
+  BombActivation: ({
     hours,
     minutes,
     seconds,
     start,
     setStart,
     countDownInterval,
-    pin,
+    truePin,
     passwordSaved,
-    setPin1,
-    setPin2,
-    setPin3,
-    setPasswordSaved,
+    setTruePin,
     handleStartBomb,
-    // setDesarmed,
-    navigation
-  ) => {
-    if (hours.length > 0 || minutes.length > 0 || seconds.length > 0) {
-      setStart(true);
-    }
-
-    if (start === true) {
-      if (pin === passwordSaved) {
-        setStart(false);
-        // setDesarmed(true);
-        clearInterval(countDownInterval);
-        navigation.navigate("Disarmed");
-
-        return;
-      } else {
-        setPin1("");
-        setPin2("");
-        setPin3("");
-        Vibration.vibrate(1000);
-
-        return;
-      }
-    } else {
-      setStart(true);
-      handleStartBomb();
-
-      return;
-    }
-  },
+    navigation,
+  }) => {},
 
   BombActivationTogether: (
     hours,
@@ -135,7 +60,6 @@ const BombService = {
     setPin3,
     setPasswordSaved,
     handleStartBomb,
-    // setDesarmed,
     navigation,
     setMessage,
     tipInput

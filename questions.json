@@ -1,8 +1,0 @@
-{
-  "questions": [
-    { "pergunta": "Quanto é 100 + 347 - 256 * 2 / 3?", "resp": "276" },
-    { "pergunta": "Quanto é 100 + 347 - 356 * 2 / 3?", "resp": "209" },
-    { "pergunta": "Quanto é 530 + 347 - 356 * 2 / 3?", "resp": "639" },
-    { "pergunta": "Quanto é 130 + 316 - 316 * 2 / 3?", "resp": "235" }
-  ]
-}
