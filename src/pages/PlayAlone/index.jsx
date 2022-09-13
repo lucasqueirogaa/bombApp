@@ -18,7 +18,6 @@ import { ImageBackground } from "react-native";
 import bombImg from "../../assets/bomba.png";
 import BombService from "../../services/BombApp";
 import api from "../../services/api/api";
-import moment from "moment";
 
 export default function PlayAlone() {
   const [started, setStarted] = useState(false);
@@ -27,7 +26,7 @@ export default function PlayAlone() {
   const [minutes, setMinutes] = useState("03");
   const [seconds, setSeconds] = useState("00");
   const [question, setQuestion] = useState("");
-  const [answer, setAnswer] = useState("123");
+  const [answer, setAnswer] = useState("");
   const [intervalId, setIntervalId] = useState();
 
   const navigation = useNavigation();
@@ -42,7 +41,7 @@ export default function PlayAlone() {
     const { data } = await api.get(`questions/${randomNumber}`);
 
     setQuestion(data?.pergunta);
-    // setAnswer(data?.resp);
+    setAnswer(data?.resp);
   }
 
   useEffect(() => {
@@ -62,6 +61,8 @@ export default function PlayAlone() {
       intervalId,
       navigation,
     });
+
+    console.log(answer);
   }
 
   useEffect(() => {

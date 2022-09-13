@@ -61,23 +61,16 @@ const BombService = {
     return null;
   },
 
-  bombStartGame: ({ setStart, hours, minutes, seconds }) => {
+  bombStartGame: ({ setStarted, hours, minutes, seconds }) => {
     if (hours.length > 0 || minutes.length > 0 || seconds.length > 0) {
-      setStart(true);
+      setStarted(true);
     }
   },
 
-  disarmBomb: ({
-    setStart,
-    passwordSaved,
-    navigation,
-    pin,
-    setPin,
-    intervalId,
-  }) => {
-    if (pin.join("") === passwordSaved) {
+  disarmBomb: ({ setStarted, answer, navigation, pin, setPin, intervalId }) => {
+    if (pin.join("") === answer) {
       clearInterval(intervalId);
-      setStart(false);
+      setStarted(false);
       navigation.navigate("Disarmed");
 
       return;
