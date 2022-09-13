@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Input, InputContainer, TipText, TipTitle } from "./styles";
 
-export default function TipInput({ started, valueInput, setValueInput }) {
+export default function TipInput({ started, question, setQuestion }) {
   return (
     <Container>
       <TipTitle>Dica de senha:</TipTitle>
@@ -9,14 +9,14 @@ export default function TipInput({ started, valueInput, setValueInput }) {
         <InputContainer>
           <Input
             placeholder="Dica para a sua dupla"
-            value={valueInput}
+            question={question}
             onChangeText={(value) => {
-              setValueInput(value);
+              setQuestion(value);
             }}
           />
         </InputContainer>
       ) : (
-        <TipText>{valueInput}</TipText>
+        <TipText>{question}</TipText>
       )}
     </Container>
   );

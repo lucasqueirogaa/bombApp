@@ -1,32 +1,38 @@
 {
   "questions": [
     {
-      "id": 0,
-      "pergunta": "A Quanto é 100 + 347 - 256 * 2 / 3?",
-      "resp": "276"
-    },
-    {
       "id": 1,
-      "pergunta": "B Quanto é 100 + 347 - 356 * 2 / 3?",
-      "resp": "209"
+      "pergunta": "Quanto é 230 + 347 - 256 * 2 + 27 + 123?",
+      "resp": "161"
     },
     {
       "id": 2,
-      "pergunta": "C Quanto é 530 + 347 - 356 * 2 / 3?",
-      "resp": "639"
+      "pergunta": "Quanto é 187 + 965 - 879 - 150?",
+      "resp": "123"
     },
     {
       "id": 3,
-      "pergunta": "D Quanto é 130 + 316 - 316 * 2 / 3?",
-      "resp": "235"
+      "pergunta": "Quanto é 530 + 347 - 356 * 5 / 3?",
+      "resp": "284"
     },
     {
       "id": 4,
-      "pergunta": "E Quanto é 130 + 316 - 316 * 2 / 3?",
-      "resp": "235"
+      "pergunta": "Quanto é 2 * 2 * 4 *9?",
+      "resp": "144"
     },
-    { "id": 5, "pergunta": "Quanto é 130 + 316 - 316 * 2 / 3?", "resp": "235" },
-    { "id": 6, "pergunta": "Quanto é 130 + 316 - 316 * 2 / 3?", "resp": "235" },
-    { "id": 7, "pergunta": "Quanto é 130 + 316 - 316 * 2 / 3?", "resp": "235" }
+    {
+      "id": 5,
+      "pergunta": "Quanto é 37 + 89 - 875 + 897 + 173?",
+      "resp": "321"
+    },
+    {
+      "id": 6,
+      "pergunta": "Quais são os 3 primeiros números de PI?",
+      "resp": "314"
+    },
+    { "id": 7, "pergunta": "1589 − 895 + 698 × 4?", "resp": "611" },
+    { "id": 8, "pergunta": "Quanto é 130 + 316 - 316 * 2 / 3?", "resp": "235" },
+    { "id": 9, "pergunta": "Quanto é 130 + 316 - 316 * 2 / 3?", "resp": "235" },
+    { "id": 10, "pergunta": "Quanto é 130 + 316 - 316 * 2 / 3?", "resp": "235" }
   ]
 }

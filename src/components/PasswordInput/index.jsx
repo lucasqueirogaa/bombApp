@@ -2,17 +2,7 @@ import React, { useRef, useState } from "react";
 import { Keyboard } from "react-native";
 import { Container, InputContainer, Input } from "./styles";
 
-export default function PasswordInput({
-  pin,
-  setPin,
-  started,
-  firstValue,
-  secondValue,
-  thirdValue,
-  firstInput,
-  secondInput,
-  thirdInput,
-}) {
+export default function PasswordInput({ pin, setPin, started }) {
   const input1 = useRef();
   const input2 = useRef();
   const input3 = useRef();

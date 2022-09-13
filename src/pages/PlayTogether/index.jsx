@@ -17,21 +17,16 @@ import TipInput from "../../components/PlayTogether/TipInput";
 import BombService from "../../services/BombApp";
 
 export default function PlayTogether() {
-  const [pin1, setPin1] = useState("");
-  const [pin2, setPin2] = useState("");
-  const [pin3, setPin3] = useState("");
+  const [pin, setPin] = useState(["", "", ""]);
 
-  let pin = `${pin1}${pin2}${pin3}`;
-
-  const [start, setStart] = useState(false);
+  const [started, setStarted] = useState(false);
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");
   const [seconds, setSeconds] = useState("");
-  const [passwordSaved, setPasswordSaved] = useState("");
   const [message, setMessage] = useState("");
-  const [tipInput, setTipInput] = useState("");
-
-  let countDownInterval;
+  const [question, setQuestion] = useState("");
+  const [answer, setAnswer] = useState("");
+  const [intervalId, setIntervalId] = useState();
 
   const navigation = useNavigation();
 
@@ -39,52 +34,47 @@ export default function PlayTogether() {
     navigation.navigate("Start");
   }
 
-  // function handleStart() {
-  //   setStart(true);
-  //   setPasswordSaved(pin);
-  //   setPin1("");
-  //   setPin2("");
-  //   setPin3("");
-  // }
-
   function handleStartBomb() {
-    BombService.StartCountdown(
-      seconds,
-      minutes,
-      hours,
+    const diffTime = BombService.getDiffTime({ hours, seconds, minutes });
+
+    BombService.startCountdown({
       setSeconds,
       setMinutes,
       setHours,
-      pin,
-      passwordSaved,
-      countDownInterval,
-      setStart,
-      // desarmed,
-      // setDesarmed,
-      navigation
-    );
+      setStarted,
+      diffTime,
+      setIntervalId,
+      intervalId,
+      navigation,
+    });
   }
 
-  function handleBombActivation() {
-    BombService.BombActivationTogether(
+  function handleStartGame() {
+    BombService.bombActivationTogether({
+      question,
+      pin,
       hours,
       minutes,
       seconds,
-      start,
-      setStart,
-      countDownInterval,
-      pin,
-      passwordSaved,
-      setPin1,
-      setPin2,
-      setPin3,
-      setPasswordSaved,
-      handleStartBomb,
-      // setDesarmed,
-      navigation,
       setMessage,
-      tipInput
-    );
+      setStarted,
+      setPin,
+      handleStartBomb,
+      answer,
+      setAnswer,
+    });
+  }
+
+  function handleDisarmBomb() {
+    BombService.bombDisarmTogether({
+      pin,
+      answer,
+      setStarted,
+      intervalId,
+      setPin,
+      setAnswer,
+      navigation,
+    });
   }
 
   return (
@@ -100,29 +90,22 @@ export default function PlayTogether() {
       />
       {message ? <BombMessage>{message ? message : null}</BombMessage> : null}
       <TipInput
-        started={start}
-        valueInput={tipInput}
-        setValueInput={setTipInput}
+        started={started}
+        question={question}
+        setQuestion={setQuestion}
       />
-      <PasswordInput
-        firstValue={pin1}
-        secondValue={pin2}
-        thirdValue={pin3}
-        firstInput={setPin1}
-        secondInput={setPin2}
-        thirdInput={setPin3}
-      />
-      {start === false ? (
+      <PasswordInput pin={pin} setPin={setPin} />
+      {!started ? (
         <Button
           buttonText="Iniciar"
           bgColor={true}
-          handlePress={() => handleBombActivation()}
+          handlePress={handleStartGame}
         />
       ) : (
         <Button
           buttonText="Desarmar"
           bgColor={true}
-          handlePress={() => handleBombActivation()}
+          handlePress={handleDisarmBomb}
         />
       )}
       <Button buttonText="Página Inicial" handlePress={handleNavToStart} />

@@ -2,14 +2,7 @@ import React, { useRef } from "react";
 import { Keyboard } from "react-native";
 import { Container, Input, InputContainer } from "./styles";
 
-export default function PasswordInput({
-  firstValue,
-  secondValue,
-  thirdValue,
-  firstInput,
-  secondInput,
-  thirdInput,
-}) {
+export default function PasswordInput({ pin, setPin, started }) {
   const input1 = useRef();
   const input2 = useRef();
   const input3 = useRef();
@@ -21,10 +14,10 @@ export default function PasswordInput({
           keyboardType={"number-pad"}
           maxLength={1}
           ref={input1}
-          value={firstValue}
+          value={pin[0]}
           onChangeText={(value) => {
             value && input2.current.focus();
-            firstInput(value);
+            setPin([value, pin[1], pin[2]]);
           }}
         />
       </InputContainer>
@@ -33,10 +26,10 @@ export default function PasswordInput({
           keyboardType={"number-pad"}
           maxLength={1}
           ref={input2}
-          value={secondValue}
+          value={pin[1]}
           onChangeText={(value) => {
             value && input3.current.focus();
-            secondInput(value);
+            setPin([pin[0], value, pin[2]]);
           }}
         />
       </InputContainer>
@@ -45,9 +38,9 @@ export default function PasswordInput({
           keyboardType={"number-pad"}
           maxLength={1}
           ref={input3}
-          value={thirdValue}
+          value={pin[2]}
           onChangeText={(value) => {
-            thirdInput(value);
+            setPin([pin[0], pin[1], value]);
             Keyboard.dismiss();
           }}
         />

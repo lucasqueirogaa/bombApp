@@ -13,9 +13,9 @@ export default function Exploded() {
     navigation.navigate("Start");
   }
 
-  // setTimeout(function () {
-  //   Vibration.vibrate(4 * 1000);
-  // }, 500);
+  setTimeout(function () {
+    Vibration.vibrate(4 * 1000);
+  }, 500);
 
   return (
     <Container>
