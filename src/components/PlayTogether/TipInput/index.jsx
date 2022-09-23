@@ -9,7 +9,7 @@ export default function TipInput({ started, question, setQuestion }) {
         <InputContainer>
           <Input
             placeholder="Dica para a sua dupla"
-            question={question}
+            value={question}
             onChangeText={(value) => {
               setQuestion(value);
             }}

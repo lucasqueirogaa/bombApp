@@ -26,11 +26,6 @@ export const TextTimer = styled.Text`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export const ButtonStart = styled.Button`
-  width: ${RFValue(280)}px;
-  height: ${RFValue(60)}px;
-`;
-
 export const TipContainer = styled.View`
   margin: 0 ${RFValue(45)}px;
 `;

@@ -10,7 +10,7 @@ import PlayTogether from "../pages/PlayTogether";
 import Disarmed from "../pages/Disarmed";
 import Exploded from "../pages/Exploded";
 
-function Routes() {
+export default function Routes() {
   return (
     <NavigationContainer>
       <Stack.Navigator
@@ -28,5 +28,3 @@ function Routes() {
     </NavigationContainer>
   );
 }
-
-export default Routes;

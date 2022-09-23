@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Keyboard } from "react-native";
 import { Container, InputContainer, Input } from "./styles";
 

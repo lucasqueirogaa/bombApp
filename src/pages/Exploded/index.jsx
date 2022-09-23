@@ -1,10 +1,12 @@
 import React from "react";
 import ButtonComponent from "../../components/Buttons";
-import { Container, Logo, Title } from "./styles";
+import { Container, Logo, Title, FailedImg } from "./styles";
 import { Vibration } from "react-native";
 
 import { useNavigation } from "@react-navigation/native";
-import { SucessImg } from "../Disarmed/styles";
+
+import logoImg from "../../assets/logoLightRed.png";
+import failedImg from "../../assets/bomba_explodiu.png";
 
 export default function Exploded() {
   const navigation = useNavigation();
@@ -19,15 +21,9 @@ export default function Exploded() {
 
   return (
     <Container>
-      <Logo
-        source={require("../../assets/logoLightRed.png")}
-        style={{ resizeMode: "contain" }}
-      />
+      <Logo source={logoImg} style={{ resizeMode: "contain" }} />
       <Title>Você falhou, a {"\n"} bomba explodiu!</Title>
-      <SucessImg
-        source={require("../../assets/bomba_explodiu.png")}
-        style={{ resizeMode: "contain" }}
-      />
+      <FailedImg source={failedImg} style={{ resizeMode: "contain" }} />
       <ButtonComponent
         buttonText={"Página incial"}
         handlePress={handleNavToStart}

@@ -61,8 +61,6 @@ export default function PlayAlone() {
       intervalId,
       navigation,
     });
-
-    console.log(answer);
   }
 
   useEffect(() => {

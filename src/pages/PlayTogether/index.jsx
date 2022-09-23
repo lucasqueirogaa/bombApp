@@ -1,13 +1,6 @@
 import React, { useState } from "react";
 
-import {
-  Container,
-  Title,
-  TipText,
-  InputContainer,
-  Input,
-  BombMessage,
-} from "./styles";
+import { Container, Title, BombMessage } from "./styles";
 import { useNavigation } from "@react-navigation/native";
 
 import Button from "../../components/Buttons";
@@ -18,7 +11,6 @@ import BombService from "../../services/BombApp";
 
 export default function PlayTogether() {
   const [pin, setPin] = useState(["", "", ""]);
-
   const [started, setStarted] = useState(false);
   const [hours, setHours] = useState("");
   const [minutes, setMinutes] = useState("");

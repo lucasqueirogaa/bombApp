@@ -1,15 +1,11 @@
 import React from "react";
-import ButtonComponent from "../../components/Buttons";
 import { Container, Logo, Title, SubTitle, Rules } from "./styles";
+import ButtonComponent from "../../components/Buttons";
 
 import { useNavigation } from "@react-navigation/native";
 
 export default function Start() {
   const navigation = useNavigation();
-
-  function handleNavToRules() {
-    navigation.navigate("Rules");
-  }
 
   function handleNavToPlayAlone() {
     navigation.navigate("PlayAlone");
@@ -17,6 +13,10 @@ export default function Start() {
 
   function handleNavToPlayTogether() {
     navigation.navigate("PlayTogether");
+  }
+
+  function handleNavToRules() {
+    navigation.navigate("Rules");
   }
 
   return (
